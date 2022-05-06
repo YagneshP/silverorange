@@ -9,13 +9,13 @@ repos.get('/', async (_, res) => {
       'https://api.github.com/users/silverorange/repos'
     );
     const githubRepos = [...response.data, ...localData];
-
+    const unforkedRepos = githubRepos.filter((repo) => repo.fork === false);
     res.header('Cache-Control', 'no-store');
 
     res.status(200);
 
-    // TODO: See README.md Task (A). Return repo data here. You’ve got this!
-    res.json(githubRepos);
+    // return repos which are not forked
+    res.json(unforkedRepos);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: 'error.message' });
