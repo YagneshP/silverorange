@@ -8,14 +8,14 @@ repos.get('/', async (_, res) => {
     const response = await axios(
       'https://api.github.com/users/silverorange/repos'
     );
-    const githubRepos = response.data;
+    const githubRepos = [...response.data, ...localData];
 
     res.header('Cache-Control', 'no-store');
 
     res.status(200);
 
     // TODO: See README.md Task (A). Return repo data here. You’ve got this!
-    res.json(repos.data);
+    res.json(githubRepos);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: 'error.message' });
