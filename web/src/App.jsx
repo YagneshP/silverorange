@@ -2,6 +2,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import axios from 'axios';
 import './App.css';
+import RepoList from './components/RepoList';
 
 export function App() {
   const [repos, setRepos] = React.useState(null);
@@ -15,8 +16,10 @@ export function App() {
         console.error(error);
       });
   }, []);
-  const repoList = repos
-    ? repos.map((repo) => <div key={repo.id}>{repo.name}</div>)
-    : 'Nothing to display';
-  return <div className="App">{repoList}</div>;
+
+  return (
+    <main>
+      <RepoList repos={repos} />
+    </main>
+  );
 }
