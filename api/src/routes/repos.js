@@ -11,11 +11,12 @@ repos.get('/', async (_, res) => {
     const githubRepos = [...response.data, ...localData];
     const unforkedRepos = githubRepos.filter((repo) => repo.fork === false);
     res.header('Cache-Control', 'no-store');
-
+    res.setHeader('Content-Type', 'application/json');
     res.status(200);
 
     // return repos which are not forked
     res.json(unforkedRepos);
+    return;
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: 'error.message' });
