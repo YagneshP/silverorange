@@ -3,13 +3,18 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import RepoList from './components/RepoList';
+import LanguageButtonList from './components/LanguageButtonList';
 
 export function App() {
   const [repos, setRepos] = React.useState(null);
+  const [languages, setlanguages] = React.useState(null);
   React.useEffect(() => {
     axios('/repos')
       .then((response) => response.data)
       .then((data) => {
+        //languages
+        const languageList = [...new Set(data.map((repo) => repo.language))];
+        setlanguages(languageList);
         //sort repos according to date
         const sortedRepos = [...data].sort(
           (repo1, repo2) =>
@@ -25,6 +30,7 @@ export function App() {
 
   return (
     <main>
+      <LanguageButtonList languageList={languages} />
       <RepoList repos={repos} />
     </main>
   );
