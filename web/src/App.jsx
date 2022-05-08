@@ -8,6 +8,7 @@ import LanguageButtonList from './components/LanguageButtonList';
 export function App() {
   const [repos, setRepos] = React.useState(null);
   const [languages, setlanguages] = React.useState(null);
+  const [languageFilter, setLanguageFilter] = React.useState(null);
   React.useEffect(() => {
     axios('/repos')
       .then((response) => response.data)
@@ -30,8 +31,11 @@ export function App() {
 
   return (
     <main>
-      <LanguageButtonList languageList={languages} />
-      <RepoList repos={repos} />
+      <LanguageButtonList
+        languageList={languages}
+        setLanguageFilter={setLanguageFilter}
+      />
+      <RepoList repos={repos} languageFilter={languageFilter} />
     </main>
   );
 }
