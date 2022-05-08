@@ -1,10 +1,13 @@
 import React from 'react';
 
-const LanguageButtonList = ({ languageList }) => {
+const LanguageButtonList = ({ languageList, setLanguageFilter }) => {
   const buttonList = languageList
     ? languageList.map((lang) => (
         <li key={lang}>
-          <button className="border rounded-full px-4 py-1 bg-slate-400 text-black">
+          <button
+            className="border rounded-full px-4 py-1 bg-slate-400 text-black"
+            onClick={(e) => setLanguageFilter(lang)}
+          >
             {lang}
           </button>
         </li>
@@ -14,7 +17,10 @@ const LanguageButtonList = ({ languageList }) => {
     <ul className="flex justify-evenly mt-2">
       {languageList && (
         <li>
-          <button className="border rounded-full px-4 py-1 bg-slate-400 text-black">
+          <button
+            className="border rounded-full px-4 py-1 bg-slate-400 text-black"
+            onClick={(e) => setLanguageFilter('all')}
+          >
             All
           </button>
         </li>
