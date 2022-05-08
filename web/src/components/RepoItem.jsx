@@ -12,7 +12,7 @@ const RepoItem = ({ repo }) => {
         {repo.description ? repo.description : 'not provided'}
       </p>
       <p>
-        <span>Language : </span> {repo.language}
+        <span>Language : </span> <button>{repo.language}</button>
       </p>
       <p>
         <span>Fork Count : </span> {repo.forks_count}
