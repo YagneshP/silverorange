@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RepoItem = ({ repo }) => {
+const RepoItem = ({ repo, setLanguageFilter }) => {
   return (
     <li className="flex flex-col p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
       <h3>
@@ -12,7 +12,10 @@ const RepoItem = ({ repo }) => {
         {repo.description ? repo.description : 'not provided'}
       </p>
       <p>
-        <span>Language : </span> <button>{repo.language}</button>
+        <span>Language : </span>{' '}
+        <button onClick={(e) => setLanguageFilter(repo.language)}>
+          {repo.language}
+        </button>
       </p>
       <p>
         <span>Fork Count : </span> {repo.forks_count}
