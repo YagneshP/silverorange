@@ -1,8 +1,11 @@
 import React from 'react';
 
-const RepoItem = ({ repo }) => {
+const RepoItem = ({ repo, handleClick }) => {
   return (
-    <li className="flex flex-col p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+    <li
+      className="flex flex-col p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
+      onClick={() => handleClick(repo)}
+    >
       <h3>
         <span>Name : </span>
         <a href={repo.html_url}>{repo.name}</a>

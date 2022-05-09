@@ -9,6 +9,7 @@ export function App() {
   const [repos, setRepos] = React.useState(null);
   const [languages, setlanguages] = React.useState(null);
   const [languageFilter, setLanguageFilter] = React.useState(null);
+  const [selectedRepo, setSelectedRepo] = React.useState(null);
   React.useEffect(() => {
     axios('/repos')
       .then((response) => response.data)
@@ -28,14 +29,26 @@ export function App() {
         console.error(error);
       });
   }, []);
-
+  const handleClick = (repo) => {
+    setSelectedRepo(repo);
+  };
   return (
     <main>
-      <LanguageButtonList
-        languageList={languages}
-        setLanguageFilter={setLanguageFilter}
-      />
-      <RepoList repos={repos} languageFilter={languageFilter} />
+      {selectedRepo ? (
+        <>{selectedRepo.name}</>
+      ) : (
+        <>
+          <LanguageButtonList
+            languageList={languages}
+            setLanguageFilter={setLanguageFilter}
+          />
+          <RepoList
+            repos={repos}
+            languageFilter={languageFilter}
+            handleClick={handleClick}
+          />
+        </>
+      )}
     </main>
   );
 }

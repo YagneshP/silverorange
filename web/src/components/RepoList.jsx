@@ -1,7 +1,7 @@
 import React from 'react';
 import RepoItem from './RepoItem';
 
-const RepoList = ({ repos, languageFilter }) => {
+const RepoList = ({ repos, languageFilter, handleClick }) => {
   const [filteredRepos, setFilteredRepos] = React.useState(null);
   React.useEffect(() => {
     if (repos) {
@@ -22,7 +22,9 @@ const RepoList = ({ repos, languageFilter }) => {
     }
   }, [languageFilter, repos]);
   const repoList = filteredRepos
-    ? filteredRepos.map((repo) => <RepoItem key={repo.name} repo={repo} />)
+    ? filteredRepos.map((repo) => (
+        <RepoItem key={repo.name} repo={repo} handleClick={handleClick} />
+      ))
     : 'Nothing to display';
   return (
     <div className="flex flex-col items-start p-3 space-y-3">{repoList}</div>
