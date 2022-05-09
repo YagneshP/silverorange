@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-const SelectedRepo = ({ repo, setSelectedRepo, loading, setLoading }) => {
+const SelectedRepo = ({ repo, setSelectedRepo, loading }) => {
   const [repoState, setRepoState] = React.useState({
     recentCommit: null,
     markdown: null,
@@ -19,7 +19,6 @@ const SelectedRepo = ({ repo, setSelectedRepo, loading, setLoading }) => {
         const recentCommit = res[0].data;
         const markdown = res[1].data;
         setRepoState((prev) => ({ ...prev, recentCommit, markdown }));
-        setLoading(false);
       })
       .catch((err) => console.log('err', err));
   }, [repo]);
