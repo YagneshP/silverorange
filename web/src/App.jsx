@@ -5,6 +5,7 @@ import './App.css';
 import RepoList from './components/RepoList';
 import LanguageButtonList from './components/LanguageButtonList';
 import SelectedRepo from './components/SelectedRepo';
+import Error from './components/Error';
 
 export function App() {
   const [repos, setRepos] = React.useState(null);
@@ -12,6 +13,7 @@ export function App() {
   const [languageFilter, setLanguageFilter] = React.useState(null);
   const [selectedRepo, setSelectedRepo] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState('');
   React.useEffect(() => {
     axios('/repos')
       .then((response) => response.data)
@@ -27,18 +29,19 @@ export function App() {
         );
         setRepos(sortedRepos);
       })
-      .catch((error) => {
-        console.log('Error happened here!');
-        console.error(error);
+      .catch((err) => {
+        setLoading(false);
+        setError(err.message);
       });
   }, []);
   const handleClick = (repo) => {
-    setLoading(true);
     setSelectedRepo(repo);
   };
   return (
     <main>
-      {loading ? (
+      {error ? (
+        <Error message={error} />
+      ) : loading ? (
         <h1>Loading ....</h1>
       ) : selectedRepo ? (
         <SelectedRepo
