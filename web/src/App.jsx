@@ -11,10 +11,12 @@ export function App() {
   const [languages, setlanguages] = React.useState(null);
   const [languageFilter, setLanguageFilter] = React.useState(null);
   const [selectedRepo, setSelectedRepo] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
     axios('/repos')
       .then((response) => response.data)
       .then((data) => {
+        setLoading(false);
         //languages
         const languageList = [...new Set(data.map((repo) => repo.language))];
         setlanguages(languageList);
@@ -35,7 +37,9 @@ export function App() {
   };
   return (
     <main>
-      {selectedRepo ? (
+      {loading ? (
+        <h1>Loading ....</h1>
+      ) : selectedRepo ? (
         <SelectedRepo repo={selectedRepo} setSelectedRepo={setSelectedRepo} />
       ) : (
         <>
