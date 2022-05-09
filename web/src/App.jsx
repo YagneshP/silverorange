@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 import RepoList from './components/RepoList';
 import LanguageButtonList from './components/LanguageButtonList';
+import SelectedRepo from './components/SelectedRepo';
 
 export function App() {
   const [repos, setRepos] = React.useState(null);
@@ -35,7 +36,7 @@ export function App() {
   return (
     <main>
       {selectedRepo ? (
-        <>{selectedRepo.name}</>
+        <SelectedRepo repo={selectedRepo} setSelectedRepo={setSelectedRepo} />
       ) : (
         <>
           <LanguageButtonList
