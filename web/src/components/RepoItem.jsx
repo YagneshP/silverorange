@@ -8,7 +8,7 @@ const RepoItem = ({ repo, handleClick }) => {
     >
       <h3>
         <span>Name : </span>
-        <a href={repo.html_url}>{repo.name}</a>
+        {repo.name}
       </h3>
       <p>
         <span>Description : </span>{' '}
