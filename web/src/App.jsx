@@ -37,6 +37,9 @@ export function App() {
   const handleClick = (repo) => {
     setSelectedRepo(repo);
   };
+  const handleError = (message) => {
+    setError(message);
+  };
   return (
     <main>
       {error ? (
@@ -47,8 +50,9 @@ export function App() {
         <SelectedRepo
           repo={selectedRepo}
           setSelectedRepo={setSelectedRepo}
-          setLoading={setLoading}
+          handleError={handleError}
           loading={loading}
+          error={error}
         />
       ) : (
         <>

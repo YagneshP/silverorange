@@ -1,7 +1,13 @@
 import axios from 'axios';
 import React from 'react';
 
-const SelectedRepo = ({ repo, setSelectedRepo, loading }) => {
+const SelectedRepo = ({
+  repo,
+  setSelectedRepo,
+  loading,
+  handleError,
+  error,
+}) => {
   const [repoState, setRepoState] = React.useState({
     recentCommit: null,
     markdown: null,
@@ -20,11 +26,11 @@ const SelectedRepo = ({ repo, setSelectedRepo, loading }) => {
         const markdown = res[1].data;
         setRepoState((prev) => ({ ...prev, recentCommit, markdown }));
       })
-      .catch((err) => console.log('err', err));
-  }, [repo]);
+      .catch((err) => handleError(err.message));
+  }, [repo, handleError]);
   return (
     <>
-      {loading ? (
+      {loading && !error ? (
         <h1>Loading...</h1>
       ) : (
         <section className="container mx-auto mt-2">
