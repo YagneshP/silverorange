@@ -33,6 +33,7 @@ export function App() {
       });
   }, []);
   const handleClick = (repo) => {
+    setLoading(true);
     setSelectedRepo(repo);
   };
   return (
@@ -40,7 +41,12 @@ export function App() {
       {loading ? (
         <h1>Loading ....</h1>
       ) : selectedRepo ? (
-        <SelectedRepo repo={selectedRepo} setSelectedRepo={setSelectedRepo} />
+        <SelectedRepo
+          repo={selectedRepo}
+          setSelectedRepo={setSelectedRepo}
+          setLoading={setLoading}
+          loading={loading}
+        />
       ) : (
         <>
           <LanguageButtonList
