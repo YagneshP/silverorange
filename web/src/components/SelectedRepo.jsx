@@ -22,6 +22,7 @@ const SelectedRepo = ({
     );
     Promise.all([commitPromise, markdownPromise])
       .then((res) => {
+        handleError('');
         const recentCommit = res[0].data;
         const markdown = res[1].data;
         setRepoState((prev) => ({ ...prev, recentCommit, markdown }));

@@ -40,6 +40,7 @@ export function App() {
   const handleError = (message) => {
     setError(message);
   };
+
   return (
     <main>
       {error ? (
