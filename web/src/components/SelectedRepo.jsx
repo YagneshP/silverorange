@@ -10,7 +10,7 @@ const SelectedRepo = ({ repo, setSelectedRepo }) => {
       .then((res) => setRecentCommit(res.data))
       .catch((err) => console.log('err', err));
   }, [repo]);
-  console.log(recentCommit);
+
   return (
     <section>
       <h2>Author : {recentCommit?.commit.author.name}</h2>
