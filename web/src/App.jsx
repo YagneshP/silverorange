@@ -19,7 +19,7 @@ export function App() {
       .then((response) => response.data)
       .then((data) => {
         setLoading(false);
-        //languages
+        //Creating list of unique Languages
         const languageList = [...new Set(data.map((repo) => repo.language))];
         setlanguages(languageList);
         //sort repos according to date
